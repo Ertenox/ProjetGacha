@@ -1,0 +1,44 @@
+services:
+  invocation:
+    image: "invocation"
+    build:
+      context: invocation
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+    depends_on:
+      - "mongo"
+  mongo:
+    image: "mongo:latest"
+    build: 
+      context: Mongo
+      dockerfile: Dockerfile
+    ports:
+      - "27017:27017"
+    environment:
+        - "MONGO_INITDB_DATABASE=gacha"
+  api:
+    image: "apigacha"
+    build:
+      context: Gatcha\JAVA\api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+
+  apipython:
+    image: "apipython"
+    build:
+      context: Gatcha\Python
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+    depends_on:
+      - "invocation"
+      - "mongo"
+
