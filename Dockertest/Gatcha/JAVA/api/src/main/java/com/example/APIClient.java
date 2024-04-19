@@ -24,7 +24,6 @@ public class APIClient {
         token = getAccessToken(username, password);
     }
 
-
     private String getAccessToken(String username, String password) throws Exception {
         URL url = new URL(API_URL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
