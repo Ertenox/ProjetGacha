@@ -28,4 +28,4 @@ http://localhost:8080/api/addXP/{token}/{xp} -> permet de s'ajouter de l'XP afin
 http://api:8081/Invocation/testRandomMonster/{NbTest} -> permet dester la repartition de la fonction aléatoire 
     http://api:8081/Invocation/testRandomMonster/500 : une repation proche de 30 30 30 10 est attendu
 
-http://localhost:8081/Invocation/{token} -> permet d'ajouter un monstre à l'utilisateur avec le token choisi
+http://localhost:8081/Invocation/assignRandomMonster/{token} -> permet de piocher un monstre aléatoire en contactant l'API client 

@@ -47,32 +47,21 @@ public class Choix {
     public String setId() {
         String data = getProba();
 
-        // Parse the JSON array response
         JSONArray jsonArray = new JSONArray(data);
 
-        // Choose an ID randomly based on lootRate values
         double randomValue = Math.random();
-        double cumulativeProbability = 0.0;
+        double SommeProba = 0.0;
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject object = jsonArray.getJSONObject(i);
             double lootRate = object.getDouble("lootRate");
 
-            cumulativeProbability += lootRate;
-            if (randomValue <= cumulativeProbability) {
+            SommeProba += lootRate;
+            if (randomValue <= SommeProba) {
                 this.id = object.getString("id");
                 return id;
             }
         }
-
-        // Fallback - return the last ID if the loop doesn't break
-        if (jsonArray.length() > 0) {
-            this.id = jsonArray.getJSONObject(jsonArray.length() - 1).getString("id");
-        } else {
-            // Handle the case where the array is empty (no objects)
-            this.id = "No ID found";
-        }
-
         return id;
     }
 }

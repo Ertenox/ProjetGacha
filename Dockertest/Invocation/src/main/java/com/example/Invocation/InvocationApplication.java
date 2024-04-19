@@ -4,7 +4,9 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -47,9 +49,7 @@ public class InvocationApplication {
                 JsonNode jsonResponse = objectMapper.readTree(connection.getInputStream());
     
                 // Récupération des valeurs d'ID et de l'username
-				System.out.println(jsonResponse);
                 String id = jsonResponse.path("message").path("Id").asText();
-				System.out.println(id);
                 return id;
             } else {
                 return "Erreur lors de l'appel de l'API /test. Code de statut : " + statusCode;
@@ -67,25 +67,32 @@ public class InvocationApplication {
 @RequestMapping(path = "/Invocation")
 class InvocationController {
 
-	@GetMapping(path = "/{token}/assignRandomMonster")
+    @GetMapping(path = "/assignRandomMonster/{token}")
     public String assignRandomMonster(@PathVariable("token") String token) throws IOException {
-        String idJoueur = InvocationApplication.verifToken(token);
-		Choix choix = new Choix();
-		choix.setId();
-		System.out.println(choix.getId());
-        URL urlUser = new URL("http://api:8080/api/assignMonster/"+idJoueur+"/"+choix.getId());
+        Choix choix = new Choix();
+        choix.setId();
+        URL urlUser = new URL("http://api:8080/api/assignMonster/" + token + "/" + choix.getId());
         HttpURLConnection con = (HttpURLConnection) urlUser.openConnection();
         con.setRequestMethod("GET");
         con.connect();
-        int status = con.getResponseCode();
-        if (status == 200) {
-            return "Monster assigned";
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+    
+        // Analyse de la réponse de l'API
+        if (response.toString().equals("Monster assigned")) {
+            return "Monster with id " + choix.getId() + " assigned to user.";
         } else {
-            return "Monster not assigned";
+            return "Response from API: " + response.toString();
         }
     }
+    
 
-	@GetMapping(path="/{token}/check")
+	@GetMapping(path="/check/{token}")
 	public String check(@PathVariable("token") String token) throws Exception{
 		return InvocationApplication.verifToken(token);
 	}

@@ -74,16 +74,19 @@ public class GatchaApplication {
         return doc;
     }
 
-    public static boolean addMonster(int idJoueur, int idMonstre) {
-        //si on veut ajouter un monstre mais que la taille de l'équipe est déjà au max on ne peut pas
+    public static String addMonster(int idJoueur, int idMonstre) {
+        // Si on veut ajouter un monstre mais que la taille de l'équipe est déjà au max, on ne peut pas
         MongoCollection<Document> collectionCompte = GatchaApplication.getMongo("Compte");
         Document doc = collectionCompte.find(Filters.eq("id", idJoueur)).first();
+        if (doc == null) {
+            return "User not found";
+        }
         if (doc.getInteger("sizeMonster") >= doc.getInteger("lvl") + 10) {
-            System.err.println("Impossible d'ajouter un monstre car la taille de l'équipe est déjà au max");
-            return false;
+            return "Impossible d'ajouter un monstre car la taille de l'équipe est déjà au max";
         } else {
             collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$push", new Document("Monstre", new Document("id", idMonstre))));
-            return true;
+            collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$set", new Document("sizeMonster", doc.getInteger("sizeMonster") + 1)));
+            return "Monster assigned";
         }
     }
 
@@ -217,7 +220,7 @@ class GatchaApplicationController {
         if (docMonster == null) {
             return "Monster not found";
         }
-        return GatchaApplication.addMonster(idJoueur, idMonsterNum) ? "Monster assigned" : "Monster not assigned";
+        return GatchaApplication.addMonster(idJoueur, idMonsterNum);
     }
 
     @GetMapping("/removeMonster/{token}/{idMonster}")

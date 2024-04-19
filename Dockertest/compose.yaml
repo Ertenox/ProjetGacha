@@ -10,6 +10,8 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev"
     depends_on:
       - "mongo"
+      - "apipython"
+      - "api"
   mongo:
     image: "mongo:latest"
     build: 
@@ -28,7 +30,9 @@ services:
       - "8080:8080"
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
-
+    depends_on:
+      - "mongo"
+      - "apipython"
   apipython:
     image: "apipython"
     build:
@@ -39,6 +43,5 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
     depends_on:
-      - "invocation"
       - "mongo"
 
