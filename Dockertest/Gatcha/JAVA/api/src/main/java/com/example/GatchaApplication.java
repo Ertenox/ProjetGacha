@@ -83,7 +83,6 @@ public class GatchaApplication {
             return false;
         } else {
             collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$push", new Document("Monstre", new Document("id", idMonstre))));
-            collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$set", new Document("sizeMonster", doc.getInteger("sizeMonster") + 1)));
             return true;
         }
     }
