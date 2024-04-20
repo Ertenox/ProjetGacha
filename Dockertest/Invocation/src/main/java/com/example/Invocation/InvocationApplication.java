@@ -24,43 +24,6 @@ public class InvocationApplication {
 		SpringApplication.run(InvocationApplication.class, args);
 	}
 
-	public static String verifToken(String token) throws IOException{
-		if (token == null) {
-            return "Token d'accès manquant.";
-        }
-    
-        // URL de l'API /test
-        String apiUrl = "http://apipython/checkToken/"+token;
-    
-        // Création d'un client HTTP
-        HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
-    
-        // Création de la requête GET pour /test
-        connection.setRequestMethod("GET");
-    
-        try {
-            // Exécution de la requête
-            int statusCode = connection.getResponseCode();
-    
-            // Vérification du code de statut
-            if (statusCode == 200) {
-                // Utilisation de Jackson pour parser la réponse JSON
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonResponse = objectMapper.readTree(connection.getInputStream());
-    
-                // Récupération des valeurs d'ID et de l'username
-                String id = jsonResponse.path("message").path("Id").asText();
-                return id;
-            } else {
-                return "Erreur lors de l'appel de l'API /test. Code de statut : " + statusCode;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Erreur lors de l'appel de l'API /test. Exception : " + e.getMessage();
-        } finally {
-            connection.disconnect();
-        }
-	}
 }
 
 @RestController
@@ -90,12 +53,6 @@ class InvocationController {
             return "Response from API: " + response.toString();
         }
     }
-    
-
-	@GetMapping(path="/check/{token}")
-	public String check(@PathVariable("token") String token) throws Exception{
-		return InvocationApplication.verifToken(token);
-	}
 
     @GetMapping(path="/testRandomMonster/{NbTest}")
     public String testRandomMonster(@PathVariable("NbTest") int NbTest) {

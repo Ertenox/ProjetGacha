@@ -1,6 +1,6 @@
 [  
     {
-        "id" : 1,
+        "id" : 0,
         "Username" : "Admin",
         "hashed_password" : "c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f",
         "lvl": 0,
@@ -8,6 +8,72 @@
         "sizeMonster": 0,
         "Monstre": [
         ]
+        
+    },
+    {
+        "id" : 1,
+        "Username" : "Joueur1",
+        "hashed_password" : "4b57e55e1b295a8e64590da4551a0635a31ce6006c5985a7b6489682d3094ecc",
+        "lvl": 0,
+        "exp": 0,
+        "sizeMonster": 1,
+        "Monstre": [
+            {
+                "idMonstre" : 4,
+                "hpRemaining": 1200
+            }
+        ]
+        
+    },
+    {
+        "id" : 2,
+        "Username" : "Joueur2",
+        "hashed_password" : "f4a6659993f927636b864c8f63e680fe700147d0559a539f0b4df9a56068f5b7",
+        "lvl": 0,
+        "exp": 0,
+        "sizeMonster" : 10,
+    "Monstre" : [
+        {
+            "idMonstre" : 3,
+            "hpRemaining": 2500
+        },
+        {
+            "idMonstre" : 4,
+            "hpRemaining": 1200
+        },
+        {
+            "idMonstre" : 1,
+            "hpRemaining": 1200
+        },
+        {
+            "idMonstre" : 3,
+            "hpRemaining": 2500
+        },
+        {
+            "idMonstre" : 2,
+            "hpRemaining": 1500
+        },
+        {
+            "idMonstre" : 3,
+            "hpRemaining": 2500
+        },
+        {
+            "idMonstre" : 1,
+            "hpRemaining": 1200
+        },
+        {
+            "idMonstre" : 3,
+            "hpRemaining": 2500
+        },
+        {
+            "idMonstre" : 3,
+            "hpRemaining": 2500
+        },
+        {
+            "idMonstre" : 1,
+            "hpRemaining": 1200
+        }
+    ]
         
     }
 ]

@@ -1,0 +1,16 @@
+Début du combat entre Monstre 1 et Monstre 2
+Points de vie initiaux pour Monstre 1 : 1500
+Points de vie initiaux pour Monstre 2 : 2500
+T1 : Monstre 1 utilise compétence 3 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 525<br>   - Points de vie restants pour Monstre 2 : 1975<br>
+T1 : Monstre 2 utilise compétence 3 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 250<br>   - Points de vie restants pour Monstre 1 : 1250<br>
+T2 : Monstre 1 utilise compétence 2 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 315<br>   - Points de vie restants pour Monstre 2 : 1660<br>
+T2 : Monstre 2 utilise compétence 2 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 350<br>   - Points de vie restants pour Monstre 1 : 900<br>
+T3 : Monstre 1 utilise compétence 1 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 200<br>   - Points de vie restants pour Monstre 2 : 1460<br>
+T3 : Monstre 2 utilise compétence 1 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 150<br>   - Points de vie restants pour Monstre 1 : 750<br>
+T4 : Monstre 1 utilise compétence 2 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 315<br>   - Points de vie restants pour Monstre 2 : 1145<br>
+T4 : Monstre 2 utilise compétence 2 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 350<br>   - Points de vie restants pour Monstre 1 : 400<br>
+T5 : Monstre 1 utilise compétence 1 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 200<br>   - Points de vie restants pour Monstre 2 : 945<br>
+T5 : Monstre 2 utilise compétence 1 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 150<br>   - Points de vie restants pour Monstre 1 : 250<br>
+T6 : Monstre 1 utilise compétence 2 sur Monstre 2<br>   - Dégâts infligés à Monstre 2 : 315<br>   - Points de vie restants pour Monstre 2 : 630<br>
+T6 : Monstre 2 utilise compétence 3 sur Monstre 1<br>   - Dégâts infligés à Monstre 1 : 250<br>   - Points de vie restants pour Monstre 1 : 0<br>
+Monstre 1 a été vaincu!<br>

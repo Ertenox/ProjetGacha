@@ -1,4 +1,5 @@
 services:
+
   invocation:
     image: "invocation"
     build:
@@ -12,6 +13,7 @@ services:
       - "mongo"
       - "apipython"
       - "api"
+
   mongo:
     image: "mongo:latest"
     build: 
@@ -21,6 +23,7 @@ services:
       - "27017:27017"
     environment:
         - "MONGO_INITDB_DATABASE=gacha"
+
   api:
     image: "apigacha"
     build:
@@ -33,6 +36,7 @@ services:
     depends_on:
       - "mongo"
       - "apipython"
+
   apipython:
     image: "apipython"
     build:
@@ -40,6 +44,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+    depends_on:
+      - "mongo"
+  
+  combat:
+    image: "combat"
+    build:
+      context: combat
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
     depends_on:

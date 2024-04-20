@@ -18,6 +18,7 @@ import com.mongodb.client.MongoDatabase;
 @SpringBootApplication
 public class GatchaApplication {
     static final String dbName = "gacha";
+    static GatchaApplicationController controller = new GatchaApplicationController();
     
     public static void main(String[] args) {
         SpringApplication.run(GatchaApplication.class, args);
@@ -78,13 +79,18 @@ public class GatchaApplication {
         // Si on veut ajouter un monstre mais que la taille de l'équipe est déjà au max, on ne peut pas
         MongoCollection<Document> collectionCompte = GatchaApplication.getMongo("Compte");
         Document doc = collectionCompte.find(Filters.eq("id", idJoueur)).first();
+        String monsterJSON = controller.getMonster(String.valueOf(idMonstre));
+        Document monsterDoc = Document.parse(monsterJSON);
+        // Récupérer les points de vie du monstre
+        int monsterHP = monsterDoc.getInteger("hp", 0);
+        System.out.println("Monster HP: " + monsterHP);
         if (doc == null) {
             return "User not found";
         }
         if (doc.getInteger("sizeMonster") >= doc.getInteger("lvl") + 10) {
             return "Impossible d'ajouter un monstre car la taille de l'équipe est déjà au max";
         } else {
-            collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$push", new Document("Monstre", new Document("id", idMonstre))));
+            collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$push", new Document("Monstre", new Document("idMonstre", idMonstre).append("hpRemaining", monsterHP))));
             collectionCompte.updateOne(Filters.eq("id", idJoueur), new Document("$set", new Document("sizeMonster", doc.getInteger("sizeMonster") + 1)));
             return "Monster assigned";
         }
